@@ -1,0 +1,1007 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    height: auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 20px;
+    padding-bottom: 80px;
+    background: linear-gradient(120deg, #8b5cf6 0%, #f78ca0 40%, #ffb3d9 100%);
+    background-size: 300% 300%;
+    background-attachment: fixed;
+    animation: gradientShift 12s ease infinite;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position:relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar styling */
+body::-webkit-scrollbar{
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track{
+    background: rgba(0,0,0,0.1);
+}
+
+body::-webkit-scrollbar-thumb{
+    background: rgba(255,215,0,0.5);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+    background: rgba(255,215,0,0.8);
+}
+
+/* Top scroll progress bar */
+#scrollProgress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(255,215,0,0.9), rgba(247,140,160,0.9));
+    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Scroll-to-top button */
+#scrollTopBtn{
+    position: fixed;
+    right: 18px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, rgba(255,215,0,0.95), rgba(247,140,160,0.95));
+    color: #3b1164;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#scrollTopBtn.show{
+    display:flex;
+}
+
+#scrollTopBtn:active{
+    transform: scale(0.96);
+}
+
+/* Use an elegant script for headings and names */
+h1, h2, h3, .photo p, #brideName-display, #groomName-display, .event-name, .date{
+    font-family: 'Great Vibes', cursive;
+}
+
+h1{
+    font-size:34px;
+}
+
+h2{
+    font-family: 'Great Vibes', cursive;
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+@keyframes gradientShift{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Soft blurred bokeh / floral overlay behind content */
+body::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(closest-side at 10% 20%, rgba(255,200,240,0.18), transparent 20%),
+        radial-gradient(closest-side at 80% 10%, rgba(200,230,255,0.14), transparent 18%),
+        radial-gradient(closest-side at 40% 70%, rgba(255,230,200,0.12), transparent 22%),
+        radial-gradient(closest-side at 75% 80%, rgba(230,200,255,0.12), transparent 20%);
+    filter: blur(28px) saturate(120%);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Light gold pattern overlay (very low opacity) */
+body::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(45deg, rgba(255,215,0,0.06) 25%, transparent 25%, transparent 50%, rgba(255,215,0,0.06) 50%, rgba(255,215,0,0.06) 75%, transparent 75%, transparent);
+    background-size: 28px 28px;
+    mix-blend-mode: overlay;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure container sits above overlays */
+.container{
+    position: relative;
+    z-index: 1;
+}
+
+.container{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding:30px;
+    padding-bottom: 40px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    max-width:450px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+/* Entrance animation for the invitation container */
+.container{
+    opacity: 0;
+    transform: translateY(18px) scale(0.996);
+    transition: transform 650ms cubic-bezier(.2,.9,.3,1), opacity 650ms ease;
+}
+
+.container.enter{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Subtle hover lift to feel interactive */
+.container:hover{
+    transform: translateY(-6px) scale(1.006);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35), inset 0 1px 2px rgba(255,255,255,0.06);
+}
+
+/* Shimmer effect for the main title */
+.shine-wrap{
+    display:inline-block;
+    position:relative;
+    overflow:hidden;
+}
+.shine-wrap::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:60%; height:100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.0), rgba(255,255,255,0.55), rgba(255,255,255,0.0));
+    transform: skewX(-18deg);
+    animation: shine 2.2s ease-in-out infinite;
+    opacity:0.85;
+}
+
+@keyframes shine{
+    0%{ left:-60%; }
+    50%{ left:120%; }
+    100%{ left:120%; }
+}
+
+h1{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+h2{
+    font-weight:300;
+}
+
+.date{
+    margin:10px 0 20px;
+    font-size:20px;
+    color:#ffffff;
+    background: rgba(0,0,0,0.25);
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:12px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.6), 0 0 8px rgba(255,215,0,0.12);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.names-input{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+    justify-content:center;
+}
+
+.names-input input{
+    padding:8px 12px;
+    border:2px solid #ffd700;
+    background: rgba(255,255,255,0.2);
+    color:white;
+    border-radius:8px;
+    font-size:14px;
+    text-align:center;
+    width:140px;
+}
+
+.names-input input::placeholder{
+    color:rgba(255,255,255,0.6);
+}
+
+.names-input input:focus{
+    outline:none;
+    background: rgba(255,255,255,0.3);
+    box-shadow:0 0 10px rgba(255,215,0,0.5);
+}
+
+.photos{
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:20px;
+}
+
+.photo{
+    position:relative;
+    cursor:pointer;
+}
+
+.animation-container{
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    top:0;
+    left:0;
+    opacity:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+.animation-container.active{
+    animation: pulse 0.8s ease-out;
+}
+
+@keyframes pulse{
+    0%{
+        width:100px;
+        height:100px;
+        opacity:1;
+        box-shadow:0 0 0 0 rgba(255,215,0,0.7);
+    }
+    50%{
+        box-shadow:0 0 0 15px rgba(255,215,0,0.4);
+    }
+    100%{
+        width:150px;
+        height:150px;
+        opacity:0;
+        box-shadow:0 0 0 30px rgba(255,215,0,0);
+    }
+}
+
+.photo img{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border:3px solid #ffd700;
+    object-fit:cover;
+    position:relative;
+    z-index:2;
+}
+
+/* Subtle animated halo/background behind photos */
+.photo::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(20px) saturate(120%);
+    opacity: 0.9;
+    transition: all 0.4s ease;
+    background: radial-gradient(circle at 30% 30%, rgba(255,215,0,0.18), rgba(247,140,160,0.08) 40%, rgba(139,92,246,0.02));
+    animation: haloPulse 4.5s ease-in-out infinite;
+}
+
+.photo::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(26px) opacity(0.7);
+    mix-blend-mode: screen;
+    background: conic-gradient(from 90deg, rgba(255,215,0,0.06), rgba(247,140,160,0.06), rgba(139,92,246,0.04));
+    animation: haloSpin 10s linear infinite;
+}
+
+.photo p{
+    margin-top:5px;
+    font-size:14px;
+}
+
+.gallery-section{
+    margin-top:25px;
+    padding:15px 0;
+    border-top:1px solid rgba(255,255,255,0.3);
+}
+
+.gallery-section h3{
+    font-size:16px;
+    margin-bottom:12px;
+    color:#ffe4e1;
+}
+
+.gallery{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.gallery-img{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:2px solid #ffd700;
+    object-fit:cover;
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-img:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 15px rgba(255,215,0,0.6);
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:20px 0;
+    flex-wrap:wrap;
+}
+
+.countdown div{
+    background: rgba(0,0,0,0.3);
+    padding:10px 8px;
+    border-radius:10px;
+    width:90px;
+    min-width:70px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+}
+
+.countdown span{
+    font-size:26px;
+    font-weight:bold;
+    display:block;
+    line-height:1;
+}
+
+.countdown small{
+    display:block;
+    font-size:12px;
+    color:rgba(255,255,255,0.95);
+}
+
+.footer{
+    font-style:italic;
+    color:#ffe4e1;
+}
+
+.events-schedule{
+    margin-top:25px;
+    padding:15px 0;
+    border-top:1px solid rgba(255,255,255,0.3);
+}
+
+.events-schedule h3{
+    font-size:22px;
+    margin-bottom:25px;
+    color:#fff;
+    text-shadow: 0 4px 12px rgba(255,215,0,0.3);
+    letter-spacing: 1px;
+}
+
+/* Elegant event cards grid */
+.events-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:20px;
+}
+
+@media(max-width:500px){
+    .events-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* Glassmorphism event cards with premium styling */
+.event-card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255,215,0,0.25);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.3, 0.7, 0.4, 1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.1);
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+.event-card:nth-child(1){ animation-delay: 0s; }
+.event-card:nth-child(2){ animation-delay: 0.2s; }
+.event-card:nth-child(3){ animation-delay: 0.4s; }
+.event-card:nth-child(4){ animation-delay: 0.6s; }
+
+@keyframes cardFloat{
+    0%, 100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-8px); }
+}
+
+/* Glow effect on hover */
+.event-card::before{
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    opacity: 0;
+    background: linear-gradient(135deg, rgba(255,215,0,0.4), rgba(255,150,200,0.2));
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+.event-card:hover::before{
+    opacity: 1;
+    filter: blur(12px);
+}
+
+.event-card:hover{
+    transform: translateY(-12px) scale(1.02);
+    border-color: rgba(255,215,0,0.5);
+    box-shadow: 0 16px 48px rgba(255,215,0,0.15), 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 2px rgba(255,255,255,0.15);
+}
+
+/* Color gradient for each card type */
+.tilak-card{
+    border-image: linear-gradient(135deg, #f78ca0, #ffd700) 1;
+    background: linear-gradient(135deg, rgba(247,140,160,0.05), rgba(255,215,0,0.02)) !important;
+}
+
+.haldi-card{
+    border-image: linear-gradient(135deg, #ffd700, #ffed4e) 1;
+    background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,237,78,0.02)) !important;
+}
+
+.mehndi-card{
+    border-image: linear-gradient(135deg, #ff69b4, #ffd700) 1;
+    background: linear-gradient(135deg, rgba(255,105,180,0.05), rgba(255,215,0,0.02)) !important;
+}
+
+.wedding-card{
+    border-image: linear-gradient(135deg, #8b5cf6, #f78ca0) 1;
+    background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(247,140,160,0.02)) !important;
+}
+
+.event-icon{
+    font-size: 40px;
+    margin-bottom: 10px;
+    display: block;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce{
+    0%, 100%{ transform: scale(1); }
+    50%{ transform: scale(1.15); }
+}
+
+.event-title{
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    color: #fff;
+    margin: 8px 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+}
+
+/* Bride & Groom name display styling */
+#brideName-display, #groomName-display{
+    font-family: 'Great Vibes', cursive;
+    font-size: 20px;
+    color: #fff;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(255,215,0,0.06), rgba(255,255,255,0.02));
+    box-shadow: 0 8px 18px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
+    margin-top:8px;
+    transition: transform 300ms ease, box-shadow 300ms ease, opacity 300ms ease;
+}
+
+#brideName-display:hover, #groomName-display:hover{
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 36px rgba(255,215,0,0.12);
+}
+
+/* Pop animation when name changes */
+.name-animate{
+    animation: namePop 720ms cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes namePop{
+    0%{ transform: scale(0.88) translateY(8px); opacity:0; filter: blur(2px); }
+    60%{ transform: scale(1.08) translateY(-4px); opacity:1; filter: blur(0); }
+    100%{ transform: scale(1) translateY(0); opacity:1; }
+}
+
+/* gentle glow behind names */
+.name-glow{
+    position: relative;
+}
+.name-glow::after{
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 140%; height: 120%; border-radius: 12px;
+    background: radial-gradient(circle, rgba(255,215,0,0.12), transparent 40%);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.9;
+}
+
+.event-date-display{
+    font-size: 13px;
+    color: #ffd700;
+    font-weight: 600;
+    margin: 6px 0;
+    background: rgba(255,215,0,0.12);
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Special animation for Tilak date (17 April) */
+.tilak-card .event-date-display{
+    animation: tilakPulse 2.6s ease-in-out infinite;
+    background: linear-gradient(90deg, rgba(255,230,150,0.14), rgba(255,215,0,0.10));
+    box-shadow: 0 6px 18px rgba(255,200,80,0.08);
+}
+
+@keyframes tilakPulse{
+    0%{ transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(255,200,80,0.06); }
+    40%{ transform: translateY(-6px) scale(1.05); box-shadow: 0 18px 36px rgba(255,200,80,0.18); }
+    70%{ transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 30px rgba(255,200,80,0.12); }
+    100%{ transform: translateY(0) scale(1); box-shadow: 0 6px 18px rgba(255,200,80,0.06); }
+}
+
+/* Slight shimmer across the Tilak icon */
+.tilak-card .event-icon{
+    position: relative;
+}
+.tilak-card .event-icon::after{
+    content: "";
+    position: absolute;
+    left: -40%; top: -10%;
+    width: 30%; height: 120%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.55), rgba(255,255,255,0.0));
+    transform: skewX(-18deg);
+    animation: iconShine 2.2s ease-in-out infinite;
+    opacity: 0.9;
+}
+
+@keyframes iconShine{
+    0%{ left:-40%; }
+    50%{ left:140%; }
+    100%{ left:140%; }
+}
+
+.event-time{
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* Old event styles - hidden */
+.event{
+    display: none;
+}
+
+.event-date{
+    display: none;
+}
+
+.event-name{
+    display: none;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateX(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/* Flip animation for changing numbers */
+.flip{
+    animation: numberFlip 0.55s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes numberFlip{
+    0%{ transform: rotateX(90deg); opacity:0; }
+    50%{ transform: rotateX(-20deg); opacity:1; }
+    100%{ transform: rotateX(0deg); opacity:1; }
+}
+
+/* Pulse / glow when seconds change */
+.pulse{
+    animation: glowPulse 0.6s ease-out;
+}
+
+@keyframes glowPulse{
+    0%{ box-shadow: 0 0 0 rgba(255,215,0,0); }
+    40%{ box-shadow: 0 0 18px rgba(255,215,0,0.9); }
+    100%{ box-shadow: 0 0 0 rgba(255,215,0,0); }
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Mobile devices (320px - 480px) */
+@media(max-width:480px){
+    body{
+        height: auto;
+        min-height: 100vh;
+        padding: 16px;
+    }
+
+    .container{
+
+@keyframes haloPulse{
+    0%{ transform: translate(-50%, -50%) scale(0.94); opacity:0.85; }
+    50%{ transform: translate(-50%, -50%) scale(1.06); opacity:1; }
+    100%{ transform: translate(-50%, -50%) scale(0.94); opacity:0.85; }
+}
+
+@keyframes haloSpin{
+    0%{ transform: translate(-50%, -50%) rotate(0deg); }
+    100%{ transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Color variations for bride and groom halos */
+#bridePhoto::before{ background: radial-gradient(circle at 30% 30%, rgba(255,182,193,0.20), rgba(255,140,180,0.08) 40%, rgba(139,92,246,0.02)); }
+#groomPhoto::before{ background: radial-gradient(circle at 30% 30%, rgba(173,216,230,0.18), rgba(30,144,255,0.06) 40%, rgba(139,92,246,0.02)); }
+#bridePhoto::after{ background: conic-gradient(from 90deg, rgba(255,182,193,0.06), rgba(255,140,180,0.06), rgba(255,215,0,0.04)); }
+#groomPhoto::after{ background: conic-gradient(from 90deg, rgba(173,216,230,0.06), rgba(30,144,255,0.06), rgba(255,215,0,0.03)); }
+        max-width: 100%;
+        padding: 20px 16px;
+        border-radius: 16px;
+        margin: 20px auto;
+    }
+
+    h1{
+        font-size: 22px !important;
+        margin-bottom: 4px;
+    }
+
+    h2{
+        font-size: 16px !important;
+        margin-bottom: 4px;
+    }
+
+    .date{
+        font-size: 14px;
+        padding: 4px 8px;
+        margin: 8px 0 12px;
+    }
+
+    .names-input{
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .names-input input{
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .photos{
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .photo img{
+        width: 80px;
+        height: 80px;
+        border: 2px solid #ffd700;
+    }
+
+    .photo p{
+        font-size: 12px;
+    }
+
+    .animation-container{
+        width: 80px;
+        height: 80px;
+    }
+
+    @keyframes pulse{
+        0%{
+            width: 80px;
+            height: 80px;
+            opacity: 1;
+            box-shadow: 0 0 0 0 rgba(255,215,0,0.7);
+        }
+        100%{
+            width: 120px;
+            height: 120px;
+            opacity: 0;
+            box-shadow: 0 0 0 20px rgba(255,215,0,0);
+        }
+    }
+
+    .countdown{
+        gap: 8px;
+        margin: 12px 0;
+    }
+
+    .countdown div{
+        width: 70px;
+        min-width: 60px;
+        padding: 8px 6px;
+        gap: 4px;
+    }
+
+    .countdown span{
+        font-size: 18px;
+    }
+
+    .countdown small{
+        font-size: 10px;
+    }
+
+    .events-schedule{
+        margin-top: 16px;
+        padding: 12px 0;
+    }
+
+    .events-schedule h3{
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .events-grid{
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .event-card{
+        padding: 16px 14px;
+        border-radius: 14px;
+    }
+
+    .event-icon{
+        font-size: 28px;
+        margin-bottom: 6px;
+    }
+
+    .event-title{
+        font-size: 18px;
+        margin: 6px 0;
+    }
+
+    .event-date-display{
+        font-size: 11px;
+        padding: 3px 8px;
+    }
+
+    .event-time{
+        font-size: 10px;
+        margin-top: 4px;
+    }
+
+    .footer{
+        font-size: 12px;
+        margin-top: 12px;
+    }
+}
+
+/* Tablets (481px - 768px) */
+@media(max-width:768px) and (min-width:481px){
+    body{
+        height: auto;
+        min-height: 100vh;
+        padding: 16px;
+    }
+
+    .container{
+        max-width: 500px;
+        padding: 24px;
+        margin: 20px auto;
+    }
+
+    h1{
+        font-size: 26px !important;
+    }
+
+    h2{
+        font-size: 18px !important;
+    }
+
+    .date{
+        font-size: 16px;
+        padding: 5px 10px;
+        margin: 10px 0 16px;
+    }
+
+    .names-input{
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .names-input input{
+        width: 130px;
+        padding: 7px 11px;
+        font-size: 13px;
+    }
+
+    .photos{
+        gap: 16px;
+        margin-bottom: 18px;
+    }
+
+    .photo img{
+        width: 90px;
+        height: 90px;
+    }
+
+    .photo p{
+        font-size: 13px;
+    }
+
+    .animation-container{
+        width: 90px;
+        height: 90px;
+    }
+
+    .countdown{
+        gap: 10px;
+        margin: 16px 0;
+    }
+
+    .countdown div{
+        width: 80px;
+        min-width: 70px;
+        padding: 10px 8px;
+    }
+
+    .countdown span{
+        font-size: 22px;
+    }
+
+    .countdown small{
+        font-size: 11px;
+    }
+
+    .events-schedule{
+        margin-top: 20px;
+        padding: 16px 0;
+    }
+
+    .events-schedule h3{
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .events-grid{
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    .event-card{
+        padding: 20px 16px;
+    }
+
+    .event-icon{
+        font-size: 32px;
+    }
+
+    .event-title{
+        font-size: 20px;
+    }
+
+    .event-date-display{
+        font-size: 12px;
+    }
+
+    .footer{
+        font-size: 13px;
+        margin-top: 16px;
+    }
+}
+
+/* Large screens (769px+) */
+@media(min-width:769px){
+    .container{
+        max-width: 450px;
+    }
+
+    body{
+        height: 100vh;
+        overflow: hidden;
+    }
+}
+
+/* Very large screens (1024px+) */
+@media(min-width:1024px){
+    .container{
+        max-width: 500px;
+    }
+
+    .events-grid{
+        gap: 18px;
+    }
+}
+
+/* Mobile safety overrides: ensure page scrolls and container bottom is visible */
+@media(max-width:480px){
+    html, body{
+        height: auto;
+    }
+    body{
+        align-items: flex-start !important;
+        padding-bottom: 140px !important;
+    }
+    .container{
+        margin-bottom: 120px !important;
+        padding-bottom: 36px !important;
+    }
+}
+
+/* Extra safe area for larger mobile / small tablet when browser UI overlays bottom */
+@media(max-width:900px){
+    body{
+        padding-bottom: 120px !important;
+    }
+    .container{
+        margin-bottom: 110px !important;
+        padding-bottom: 36px !important;
+    }
+}
